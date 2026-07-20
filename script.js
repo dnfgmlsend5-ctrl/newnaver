@@ -1,33 +1,15 @@
-const btn=document.querySelector("#btn");
+const btn = document.querySelector("#btn");
+const searchInput = document.querySelector("#search");
 
-btn.onclick=async()=>{
+function searchNaver() {
+  const query = searchInput.value.trim();
+  if (!query) return;
+  window.location.href = `https://search.naver.com/search.naver?query=${encodeURIComponent(query)}`;
+}
 
-const query=document.querySelector("#search").value;
-
-const response=await fetch("/search?query="+encodeURIComponent(query));
-
-const data=await response.json();
-
-const result=document.querySelector("#result");
-
-result.innerHTML="";
-
-data.items.forEach(item=>{
-
-result.innerHTML+=`
-<div>
-
-<a href="${item.link}" target="_blank">
-
-${item.title}
-
-</a>
-
-<p>${item.description}</p>
-
-</div>
-`;
-
+btn.addEventListener("click", searchNaver);
+searchInput.addEventListener("keydown", function (event) {
+  if (event.key === "Enter") {
+    searchNaver();
+  }
 });
-
-};
