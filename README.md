@@ -1,2 +1,0 @@
-# newnaver
-dasd
